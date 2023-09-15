@@ -1,12 +1,14 @@
 import Store from './services/Store.js';
-import API from './services/API.js';
-import { loadData } from './services/Menu.js';
 import Router from './services/Router.js';
+import { loadData } from './services/Menu.js';
 
-// Custom Elements
+// Custom Components
 import MenuPage from './components/MenuPage.js';
 import OrderPage from './components/OrderPage.js';
 import DetailsPage from './components/DetailsPage.js';
+import ProductItem from './components/ProductItem.js';
+
+const components = [MenuPage, OrderPage, DetailsPage, ProductItem];
 
 const $ = {
     query: document.querySelector.bind(document),
@@ -20,12 +22,13 @@ const $ = {
 // HTMLElement.prototype.$ = (s) => this.querySelectorAll(s);
 
 window.$ = $;
+window.App = { store: Store, router: Router };
 
-window.App = {};
-App.store = Store;
-App.router = Router;
+window.addEventListener('DOMContentLoaded', () => {
+    components.forEach((component) => {
+        customElements.define(component.tag, component.element);
+    });
 
-window.addEventListener('DOMContentLoaded', async () => {
-    await loadData();
     App.router.init();
+    loadData();
 });

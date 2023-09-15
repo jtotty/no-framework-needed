@@ -18,8 +18,6 @@ const Router = {
     },
 
     go: (route, addToHistory = true) => {
-        console.log(route);
-
         if (addToHistory) {
             history.pushState({ route }, '', route);
         }
@@ -38,8 +36,8 @@ const Router = {
             default:
                 if (route.startsWith('/product-')) {
                     pageElement = document.createElement('details-page');
-                    const paramId = route.substring(route.lastindexOf('-') + 1);
-                    pageElement.dataset.id = paramId;
+                    const paramId = route.substring(route.lastIndexOf('-') + 1);
+                    pageElement.dataset.productId = paramId;
                 }
         }
 

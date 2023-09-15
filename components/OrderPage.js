@@ -1,7 +1,10 @@
-export default class OrderPage extends HTMLElement {
+class OrderPage extends HTMLElement {
     constructor() {
         super();
     }
 }
 
-customElements.define('order-page', OrderPage);
+export default {
+    tag: 'order-page',
+    element: OrderPage,
+};
